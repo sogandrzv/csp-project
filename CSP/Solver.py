@@ -36,9 +36,23 @@ class Solver:
         else:
             print(f'Failed to solve after {time_elapsed} ms')
 
-
     def backtracking(self):
-        pass
+
+        if self.is_finished():  # TODO check
+            return True
+
+        var = self.select_unassigned_variable()
+        for value in self.order_domain_values(var):
+            var.value = value
+            if self.is_consistent(var):
+                if self.use_forward_check:
+                    self.forward_check(var)
+                result = self.backtracking()
+                if result:
+                    return True
+                var.value = None
+
+        return False
 
     def forward_check(self, var):
         pass
