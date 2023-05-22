@@ -98,5 +98,13 @@ class Solver:
         return True
 
     def lcv(self, var: Variable):
-        pass
-        # Write your code here
+        values = sorted(var.domain, key=lambda x: self.count_inconsistency(var))
+        return values
+
+    def count_inconsistency(self, var):
+        count = 0
+        for val in var.domain:
+            var.value = val
+            if not self.is_consistent(var):
+                count += 1
+        return count
