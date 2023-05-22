@@ -50,7 +50,7 @@ class Solver:
                 result = self.backtracking()
                 if result:
                     return True
-                var.value = None
+        var.value = None
 
         return False
 
