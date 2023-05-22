@@ -79,9 +79,18 @@ class Solver:
         return var.domain
 
     def mrv(self) -> Optional[Variable]:
-        pass
-        # Write your code here
+        min_remaining_values = float('inf')
+        selected_variable = None
 
+        unassigned_var = self.problem.get_unassigned_variables()
+        for var in unassigned_var:
+            if len(var.domain) < min_remaining_values:
+                selected_variable = var
+                min_remaining_values = len(var.domain)
+
+        return selected_variable
+
+    
     def is_consistent(self, var: Variable):
         for constraint in self.problem.constraints:
             if var in constraint.variables and not constraint.is_satisfied():
