@@ -55,7 +55,17 @@ class Solver:
         return False
 
     def forward_check(self, var):
-        pass
+        for neighbor in var.neighbors:
+            if not neighbor.has_value:
+                for neighbour_value in neighbor.domain:
+                    neighbor.value = neighbour_value
+                    if not self.is_consistent(neighbor):
+                        neighbor.domain.remove(neighbour_value)
+                    neighbor.value = None
+                    if len(neighbor.domain) == 0:
+                        return False
+
+        return True
 
     def select_unassigned_variable(self) -> Optional[Variable]:
         if self.use_mrv:
@@ -78,10 +88,6 @@ class Solver:
                 return False
         return True
 
-
-
     def lcv(self, var: Variable):
         pass
         # Write your code here
-
-
