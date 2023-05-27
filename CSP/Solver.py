@@ -38,7 +38,7 @@ class Solver:
 
     def backtracking(self):
 
-        if self.is_finished():  # TODO check
+        if self.is_finished():
             return True
 
         var = self.select_unassigned_variable()

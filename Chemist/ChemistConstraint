@@ -1,4 +1,0 @@
-from abc import ABC
-
-from CSP.Constraint import Constraint
-
